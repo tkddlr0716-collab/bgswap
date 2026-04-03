@@ -137,7 +137,7 @@
 | `RESEND_API_KEY` | ✅ | 이메일 발송 |
 | `CRON_SECRET` | ✅ | Vercel Cron 인증 |
 | `NEXT_PUBLIC_BASE_URL` | ✅ | https://bgswap.io |
-| `NEXT_PUBLIC_POSTHOG_KEY` | ✅ | phc_ovEXomaTbPgbfnxhdkaiDvP9rMs2F8FPiBLMULnM4zHU |
+| `NEXT_PUBLIC_POSTHOG_KEY` | ✅ | (set in Vercel) |
 | `NEXT_PUBLIC_POSTHOG_HOST` | ✅ | https://us.i.posthog.com |
 
 ### 외부 서비스 연동 상태
