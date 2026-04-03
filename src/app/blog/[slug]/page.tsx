@@ -14,6 +14,14 @@ const POSTS: Record<string, () => Promise<any>> = {
   "bgswap-vs-removebg-vs-photoroom": () => import("@/content/blog/bgswap-vs-removebg-vs-photoroom.mdx"),
   "amazon-product-photo-requirements": () => import("@/content/blog/amazon-product-photo-requirements.mdx"),
   "batch-product-photo-editing": () => import("@/content/blog/batch-product-photo-editing.mdx"),
+  "how-to-remove-background-product-photo-free": () => import("@/content/blog/how-to-remove-background-product-photo-free.mdx"),
+  "white-background-product-photo-guide": () => import("@/content/blog/white-background-product-photo-guide.mdx"),
+  "product-photos-with-phone": () => import("@/content/blog/product-photos-with-phone.mdx"),
+  "etsy-product-photography-tips": () => import("@/content/blog/etsy-product-photography-tips.mdx"),
+  "amazon-listing-suppressed-background-fix": () => import("@/content/blog/amazon-listing-suppressed-background-fix.mdx"),
+  "product-photo-background-colors": () => import("@/content/blog/product-photo-background-colors.mdx"),
+  "shopify-product-image-size": () => import("@/content/blog/shopify-product-image-size.mdx"),
+  "diy-product-photography-at-home": () => import("@/content/blog/diy-product-photography-at-home.mdx"),
 };
 
 export function generateStaticParams() {
