@@ -41,8 +41,10 @@ yarn-error.log*
 
 # test outputs
 scripts/test-output/
-*.jpg
-*.png
+scripts/launch-assets/portfolio/
+scripts/launch-assets/*.jpg
+scripts/launch-assets/*.png
+scripts/launch-assets/*.gif
 
 # sensitive business docs (keep private)
 COST_MANAGEMENT.md
