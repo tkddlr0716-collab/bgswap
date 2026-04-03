@@ -44,6 +44,13 @@ scripts/test-output/
 *.jpg
 *.png
 
+# sensitive business docs (keep private)
+COST_MANAGEMENT.md
+BUSINESS.md
+MARKETING_PLAN.md
+GROWTH.md
+docs-backup/
+
 # vercel
 .vercel
 
