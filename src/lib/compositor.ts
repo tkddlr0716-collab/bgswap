@@ -464,6 +464,7 @@ export async function createFreePreviewAll(
     </svg>
   `;
 
+  // All 15 backgrounds: 5 solid + 5 gradient + 5 texture
   for (const bg of BG_OPTIONS) {
     const composited = await compositeProductOnBg(productPng, bg.color, previewSize);
     const watermarked = await sharp(composited)
@@ -471,6 +472,24 @@ export async function createFreePreviewAll(
       .jpeg({ quality: 85 })
       .toBuffer();
     results.push({ name: bg.name, label: bg.label, buffer: watermarked });
+  }
+
+  for (const grad of GRADIENT_OPTIONS) {
+    const composited = await compositeProductOnGradient(productPng, grad, { size: previewSize, padding: 0.8 });
+    const watermarked = await sharp(composited)
+      .composite([{ input: Buffer.from(svgWatermark), gravity: "center" }])
+      .jpeg({ quality: 85 })
+      .toBuffer();
+    results.push({ name: grad.name, label: grad.label, buffer: watermarked });
+  }
+
+  for (const tex of TEXTURE_OPTIONS) {
+    const composited = await compositeProductOnTexture(productPng, tex, { size: previewSize, padding: 0.8 });
+    const watermarked = await sharp(composited)
+      .composite([{ input: Buffer.from(svgWatermark), gravity: "center" }])
+      .jpeg({ quality: 85 })
+      .toBuffer();
+    results.push({ name: tex.name, label: tex.label, buffer: watermarked });
   }
 
   return results;

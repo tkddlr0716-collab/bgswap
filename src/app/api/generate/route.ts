@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
       const removedRes = await fetch(removedUrl);
       const removedPng = Buffer.from(await removedRes.arrayBuffer());
 
-      // Create 5 background previews (512px, watermarked)
+      // Create 15 background previews (512px, watermarked)
       const previews = await createFreePreviewAll(removedPng);
       for (const preview of previews) {
         const previewKey = `previews/${orderId}/free_${preview.name}.jpg`;

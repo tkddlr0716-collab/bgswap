@@ -47,6 +47,82 @@ export async function sendResumeEmail(
   });
 }
 
+export async function sendNurtureEmail(
+  to: string,
+  orderId: string,
+  stage: "24h" | "48h" | "7d"
+): Promise<void> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const resultUrl = `${baseUrl}/result/${orderId}`;
+
+  const subjects: Record<string, string> = {
+    "24h": "How were your preview backgrounds?",
+    "48h": "Your full-resolution photos are one click away",
+    "7d": "Your preview photos will be deleted soon",
+  };
+
+  const bodies: Record<string, string> = {
+    "24h": `
+      <h1 style="color: #1a1a1a;">How did your preview turn out?</h1>
+      <p>Yesterday you tried BgSwap with a product photo. You got 15 background previews — did any of them work for your listing?</p>
+      <p>If you liked what you saw, upgrade to get:</p>
+      <ul>
+        <li><strong>Full resolution</strong> (2048px, no watermark)</li>
+        <li><strong>15 backgrounds</strong> per product</li>
+        <li><strong>Batch upload</strong> up to 100 products at once</li>
+        <li><strong>ZIP download</strong> — ready to list</li>
+      </ul>
+      <a href="${resultUrl}"
+         style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px;
+                text-decoration: none; border-radius: 6px; margin: 16px 0;">
+        View Your Preview &rarr;
+      </a>
+      <p style="color: #666; font-size: 14px;">Starter: $4.99 for 10 products &middot; Pro: $29 for 100 products</p>
+    `,
+    "48h": `
+      <h1 style="color: #1a1a1a;">Your product deserves better photos</h1>
+      <p>Quick reminder — your preview backgrounds are still waiting. Upgrade to download full-resolution images without watermarks.</p>
+      <p style="background: #f0f9ff; padding: 12px 16px; border-radius: 8px; color: #1e40af;">
+        <strong>Most sellers choose Pro</strong> — 100 products &times; 15 backgrounds = 1,500 images for $29 ($0.02/image)
+      </p>
+      <a href="${resultUrl}"
+         style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px;
+                text-decoration: none; border-radius: 6px; margin: 16px 0;">
+        Upgrade Now &rarr;
+      </a>
+    `,
+    "7d": `
+      <h1 style="color: #1a1a1a;">Your preview photos expire tomorrow</h1>
+      <p>The preview backgrounds you generated will be automatically deleted in 24 hours.</p>
+      <p>If you want to keep them in full resolution (no watermark, 2048px), upgrade before they're gone.</p>
+      <a href="${resultUrl}"
+         style="display: inline-block; background: #f59e0b; color: #0f172a; padding: 12px 24px;
+                text-decoration: none; border-radius: 6px; margin: 16px 0; font-weight: bold;">
+        Save Your Photos &rarr;
+      </a>
+      <p style="color: #666; font-size: 14px;">After deletion, you can always upload again for free.</p>
+    `,
+  };
+
+  await getResend().emails.send({
+    from: "BgSwap <noreply@bgswap.io>",
+    to,
+    subject: subjects[stage],
+    headers: {
+      "List-Unsubscribe": `<mailto:unsubscribe@bgswap.io?subject=unsubscribe>`,
+    },
+    html: `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+        ${bodies[stage]}
+        <hr style="border: none; border-top: 1px solid #eee; margin: 24px 0;" />
+        <p style="color: #999; font-size: 12px;">
+          <a href="mailto:unsubscribe@bgswap.io?subject=unsubscribe">Unsubscribe</a>
+        </p>
+      </div>
+    `,
+  });
+}
+
 export async function sendDownloadEmail(
   to: string,
   downloadToken: string,
