@@ -37,7 +37,7 @@ Amazon, Etsy, Shopify 셀러 — 특히 50~500개 SKU를 가진 중소 셀러.
 | Starter | $4.99 | 10장 | 150장 | $0.03 | ~$0.02 | ~94% |
 | Pro | $29 | 100장 | 1,500장 | $0.02 | ~$0.02 | ~93% |
 
-- 원가: Replicate BiRefNet ~$0.002/장 (배경 제거), Sharp 합성은 CPU 비용만
+- 원가: Replicate BiRefNet ~$0.0004~0.001/장 (warm $0.0004, cold start 포함 $0.001), Sharp 합성은 CPU 비용만
 - 인프라: Vercel (무료~$20/월), Turso (무료), R2 (무료 tier), Resend (무료 tier)
 - **손익분기**: 월 Starter 1건이면 흑자
 
