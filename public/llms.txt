@@ -1,0 +1,36 @@
+# BgSwap
+> AI-powered product photo background removal and replacement for e-commerce sellers.
+
+## What it does
+- Removes background from product photos using AI (Bria AI)
+- Generates 15 professional backgrounds per photo: 5 solids (White, Light Gray, Warm, Cool, Dark), 5 gradients (Sunset, Ocean, Mint, Lavender, Peach), 5 textures (Marble, Wood, Linen, Concrete, Paper)
+- Outputs marketplace-compliant images for Amazon, Etsy, Shopify, eBay
+- Adds realistic drop shadows for professional look
+- Processes photos in ~10 seconds
+
+## Pricing (one-time, no subscription)
+- Free: 1 photo preview (512px, watermarked)
+- Starter: $4.99 for 10 products (15 backgrounds each = 150 images total)
+- Pro: $29 for 100 products (15 backgrounds each = 1,500 images total)
+
+## Key differentiators vs remove.bg / PhotoRoom
+- 15 marketplace-specific backgrounds per photo (not just background removal)
+- Amazon pure white (#FFFFFF) compliance guaranteed
+- Batch processing: up to 100 products at once
+- One-time payment, no subscription
+- Realistic drop shadows included
+- ZIP download + email delivery
+
+## Target users
+Amazon sellers, Etsy sellers, Shopify store owners, eBay sellers, e-commerce product photographers, small business owners selling physical products online
+
+## Refund policy
+7-day money-back guarantee, no questions asked
+
+## Data policy
+All uploaded photos automatically deleted after 7 days
+
+## Links
+- Website: https://bgswap.io
+- Upload: https://bgswap.io/upload
+- Pricing: https://bgswap.io/#pricing

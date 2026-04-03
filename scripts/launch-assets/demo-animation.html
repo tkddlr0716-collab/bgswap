@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280,height=720">
+<title>BgSwap Demo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1280px; height: 720px; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; }
+
+  .scene { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s; display: flex; align-items: center; justify-content: center; }
+  .scene.active { opacity: 1; }
+
+  /* Scene 1: Landing */
+  .s1 { background: #fff; flex-direction: column; gap: 20px; }
+  .s1 .badge { background: #eff6ff; color: #1d4ed8; font-size: 14px; font-weight: 600; padding: 6px 16px; border-radius: 20px; }
+  .s1 h1 { font-size: 52px; font-weight: 800; text-align: center; color: #0f172a; line-height: 1.2; }
+  .s1 h1 span { color: #2563eb; }
+  .s1 p { color: #64748b; font-size: 18px; text-align: center; max-width: 500px; }
+  .s1 .cta { background: #f59e0b; color: #0f172a; font-size: 18px; font-weight: 700; padding: 16px 36px; border-radius: 10px; border: none; cursor: pointer; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); box-shadow: 0 0 30px rgba(245,158,11,0.4); } }
+
+  /* Scene 2: Upload */
+  .s2 { background: #f8fafc; flex-direction: column; gap: 24px; }
+  .s2 .upload-zone { width: 500px; height: 300px; border: 3px dashed #cbd5e1; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; transition: all 0.5s; }
+  .s2 .upload-zone.dropping { border-color: #2563eb; background: #eff6ff; transform: scale(1.02); }
+  .s2 .upload-zone.done { border-color: #22c55e; background: #f0fdf4; }
+  .s2 .upload-icon { font-size: 48px; }
+  .s2 .upload-text { color: #64748b; font-size: 16px; }
+  .s2 .upload-file { display: flex; align-items: center; gap: 12px; background: white; border: 1px solid #e2e8f0; padding: 12px 20px; border-radius: 10px; opacity: 0; transition: opacity 0.5s; }
+  .s2 .upload-file.show { opacity: 1; }
+  .s2 .upload-file img { width: 48px; height: 48px; object-fit: cover; border-radius: 6px; }
+  .s2 .file-name { font-size: 14px; color: #334155; font-weight: 500; }
+  .s2 .file-size { font-size: 12px; color: #94a3b8; }
+  .s2 .email-row { display: flex; gap: 12px; opacity: 0; transition: opacity 0.5s; }
+  .s2 .email-row.show { opacity: 1; }
+  .s2 .email-input { width: 300px; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 15px; }
+  .s2 .upload-btn { background: #2563eb; color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: none; font-size: 15px; }
+
+  /* Scene 3: Processing */
+  .s3 { background: #fff; flex-direction: column; gap: 20px; }
+  .s3 .proc-icon { font-size: 56px; animation: spin 2s linear infinite; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .s3 .proc-text { font-size: 24px; font-weight: 700; color: #0f172a; }
+  .s3 .proc-sub { font-size: 15px; color: #64748b; }
+  .s3 .progress-bar { width: 400px; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+  .s3 .progress-fill { height: 100%; background: #2563eb; border-radius: 4px; width: 0%; transition: width 3s ease-out; }
+  .s3 .progress-fill.go { width: 100%; }
+  .s3 .steps { display: flex; gap: 8px; margin-top: 8px; }
+  .s3 .step-dot { width: 32px; height: 6px; background: #e2e8f0; border-radius: 3px; transition: background 0.3s, width 0.3s; }
+  .s3 .step-dot.active { background: #2563eb; width: 48px; }
+
+  /* Scene 4: Results */
+  .s4 { background: #fff; flex-direction: column; gap: 16px; padding: 40px; }
+  .s4 .result-title { font-size: 28px; font-weight: 700; color: #0f172a; }
+  .s4 .result-sub { font-size: 14px; color: #64748b; }
+  .s4 .result-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; width: 100%; max-width: 900px; }
+  .s4 .result-item { opacity: 0; transform: scale(0.8); transition: all 0.3s; }
+  .s4 .result-item.show { opacity: 1; transform: scale(1); }
+  .s4 .result-item img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid #e5e7eb; }
+  .s4 .result-item .label { text-align: center; font-size: 11px; color: #64748b; margin-top: 4px; }
+  .s4 .count-badge { background: #dbeafe; color: #1d4ed8; font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: 20px; }
+
+  /* Scene 5: Download */
+  .s5 { background: #f0fdf4; flex-direction: column; gap: 20px; }
+  .s5 .check { font-size: 72px; }
+  .s5 h2 { font-size: 36px; font-weight: 700; color: #166534; }
+  .s5 p { font-size: 16px; color: #15803d; }
+  .s5 .dl-btn { background: #16a34a; color: white; font-size: 18px; font-weight: 700; padding: 16px 36px; border-radius: 10px; border: none; }
+
+  /* Scene 6: End card */
+  .s6 { background: linear-gradient(135deg, #0f172a, #1e3a5f); flex-direction: column; gap: 16px; }
+  .s6 h2 { font-size: 48px; font-weight: 800; color: white; text-align: center; }
+  .s6 h2 span { color: #f59e0b; }
+  .s6 p { font-size: 20px; color: #94a3b8; }
+  .s6 .url { font-size: 28px; font-weight: 700; color: #f59e0b; }
+</style>
+</head>
+<body>
+
+<!-- Scene 1: Landing (0-3s) -->
+<div class="scene s1" id="s1">
+  <div class="badge">Built for Amazon, Etsy & Shopify sellers</div>
+  <h1>Upload Once.<br><span>Get 15 Backgrounds.</span></h1>
+  <p>AI removes the background and generates 15 professional product photos in seconds.</p>
+  <button class="cta">Try Free — No Credit Card →</button>
+</div>
+
+<!-- Scene 2: Upload (3-8s) -->
+<div class="scene s2" id="s2">
+  <h2 style="font-size:24px;font-weight:700;color:#0f172a;">Upload Your Product Photo</h2>
+  <div class="upload-zone" id="uploadZone">
+    <div class="upload-icon">📸</div>
+    <div class="upload-text">Drag & drop your product photo here</div>
+  </div>
+  <div class="upload-file" id="uploadFile">
+    <img src="mug-before.jpg" alt="Product">
+    <div>
+      <div class="file-name">coffee-mug.jpg</div>
+      <div class="file-size">2.4 MB • Ready to upload</div>
+    </div>
+  </div>
+  <div class="email-row" id="emailRow">
+    <input class="email-input" value="seller@myshop.com" readonly>
+    <button class="upload-btn">Upload →</button>
+  </div>
+</div>
+
+<!-- Scene 3: Processing (8-12s) -->
+<div class="scene s3" id="s3">
+  <div class="proc-icon">✨</div>
+  <div class="proc-text">AI is working its magic...</div>
+  <div class="proc-sub">Removing background & generating 15 backgrounds</div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="steps">
+    <div class="step-dot" id="dot0"></div>
+    <div class="step-dot" id="dot1"></div>
+    <div class="step-dot" id="dot2"></div>
+    <div class="step-dot" id="dot3"></div>
+  </div>
+</div>
+
+<!-- Scene 4: Results (12-22s) -->
+<div class="scene s4" id="s4">
+  <div class="result-title">🎉 Your Product Photos are Ready!</div>
+  <div class="result-sub">15 professional backgrounds generated</div>
+  <div class="result-grid" id="resultGrid">
+    <div class="result-item"><img src="mug-white.jpg"><div class="label">White</div></div>
+    <div class="result-item"><img src="mug-light-gray.jpg"><div class="label">Light Gray</div></div>
+    <div class="result-item"><img src="mug-warm.jpg"><div class="label">Warm</div></div>
+    <div class="result-item"><img src="mug-cool-gray.jpg"><div class="label">Cool Gray</div></div>
+    <div class="result-item"><img src="mug-dark.jpg"><div class="label">Dark</div></div>
+    <div class="result-item"><img src="mug-sunset.jpg"><div class="label">Sunset</div></div>
+    <div class="result-item"><img src="mug-ocean.jpg"><div class="label">Ocean</div></div>
+    <div class="result-item"><img src="mug-mint.jpg"><div class="label">Mint</div></div>
+    <div class="result-item"><img src="mug-lavender.jpg"><div class="label">Lavender</div></div>
+    <div class="result-item"><img src="mug-peach.jpg"><div class="label">Peach</div></div>
+    <div class="result-item"><img src="mug-marble.jpg"><div class="label">Marble</div></div>
+    <div class="result-item"><img src="mug-wood.jpg"><div class="label">Wood</div></div>
+    <div class="result-item"><img src="mug-linen.jpg"><div class="label">Linen</div></div>
+    <div class="result-item"><img src="mug-concrete.jpg"><div class="label">Concrete</div></div>
+    <div class="result-item"><img src="mug-paper.jpg"><div class="label">Paper</div></div>
+  </div>
+  <div class="count-badge">15 images • Full resolution • Ready to download</div>
+</div>
+
+<!-- Scene 5: Download (22-25s) -->
+<div class="scene s5" id="s5">
+  <div class="check">✅</div>
+  <h2>Download Your Photos</h2>
+  <p>15 professional backgrounds • Full resolution • ZIP file</p>
+  <button class="dl-btn">Download All (ZIP) →</button>
+</div>
+
+<!-- Scene 6: End card (25-30s) -->
+<div class="scene s6" id="s6">
+  <h2>15 Backgrounds.<br><span>Seconds, Not Hours.</span></h2>
+  <p>From $0.29 per product • No subscription</p>
+  <div class="url">bgswap.io</div>
+</div>
+
+<script>
+const scenes = ['s1','s2','s3','s4','s5','s6'];
+let current = -1;
+
+function showScene(id) {
+  scenes.forEach(s => document.getElementById(s).classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// Timeline
+setTimeout(() => { showScene('s1'); }, 200);          // 0s: Landing
+setTimeout(() => { showScene('s2'); }, 3500);          // 3.5s: Upload
+
+// Upload animation
+setTimeout(() => { document.getElementById('uploadZone').classList.add('dropping'); }, 4500);
+setTimeout(() => {
+  document.getElementById('uploadZone').classList.remove('dropping');
+  document.getElementById('uploadZone').classList.add('done');
+  document.getElementById('uploadFile').classList.add('show');
+}, 5500);
+setTimeout(() => { document.getElementById('emailRow').classList.add('show'); }, 6500);
+
+setTimeout(() => { showScene('s3'); }, 8000);          // 8s: Processing
+
+// Progress animation
+setTimeout(() => { document.getElementById('progressFill').classList.add('go'); }, 8500);
+setTimeout(() => { document.getElementById('dot0').classList.add('active'); }, 8800);
+setTimeout(() => { document.getElementById('dot1').classList.add('active'); }, 9500);
+setTimeout(() => { document.getElementById('dot2').classList.add('active'); }, 10200);
+setTimeout(() => { document.getElementById('dot3').classList.add('active'); }, 11000);
+
+setTimeout(() => { showScene('s4'); }, 12000);         // 12s: Results
+
+// Reveal results one by one
+const items = document.querySelectorAll('.result-item');
+items.forEach((item, i) => {
+  setTimeout(() => { item.classList.add('show'); }, 12500 + i * 200);
+});
+
+setTimeout(() => { showScene('s5'); }, 22000);         // 22s: Download
+setTimeout(() => { showScene('s6'); }, 25000);         // 25s: End card
+</script>
+
+</body>
+</html>
