@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://bgswap.io"),
+  alternates: { canonical: "./" },
   title: "BgSwap - Studio-Quality Product Photos in Seconds",
   description:
     "Upload any product photo. AI removes the background and creates clean, professional images. $29 for 100 photos. No subscription.",

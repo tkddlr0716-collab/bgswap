@@ -39,7 +39,7 @@ Upload up to 100 product photos. AI processes them 3 at a time, ~20 seconds per 
 
 ### Pricing (one-time, no subscription)
 
-- **Free:** 1 photo preview (5 backgrounds, 512px, watermarked)
+- **Free:** 1 photo preview (15 backgrounds, 512px, watermarked)
 - **Starter:** $4.99 → 10 products × 15 backgrounds = 150 images ($0.03/image)
 - **Pro:** $29 → 100 products × 15 backgrounds = 1,500 images ($0.02/image)
 
