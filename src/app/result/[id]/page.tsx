@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { trackCheckoutClick, trackDownloadClick } from "@/lib/analytics";
+import { trackCheckoutClick, trackDownloadClick, trackPreviewViewed, trackPreviewBrowse } from "@/lib/analytics";
 
 interface PreviewImage {
   style: string;
@@ -122,6 +122,11 @@ export default function ResultPage() {
         setData(json);
         setLoading(false);
 
+        // Track preview viewed (once)
+        if (json.status === "sample_generated" && json.previewImages?.length) {
+          trackPreviewViewed(orderId, json.previewImages.length);
+        }
+
         // Keep polling if paid and still processing
         const stillProcessing =
           (json.pendingCount > 0 || json.processingCount > 0) &&
@@ -227,7 +232,7 @@ export default function ResultPage() {
           {previews.map((p, i) => (
             <button
               key={p.style}
-              onClick={() => setSelectedPreview(i)}
+              onClick={() => { setSelectedPreview(i); trackPreviewBrowse(orderId, p.style); }}
               className={`rounded-lg overflow-hidden border-2 transition w-14 h-14 ${
                 i === selectedPreview ? "border-blue-600 shadow-md" : "border-gray-200 hover:border-gray-400"
               }`}

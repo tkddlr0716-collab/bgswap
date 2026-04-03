@@ -91,6 +91,14 @@ export function trackUploadError(errorType: string) {
 
 // ── Result page events ──
 
+export function trackPreviewViewed(orderId: string, previewCount: number) {
+  capture("preview_viewed", { order_id: orderId, preview_count: previewCount });
+}
+
+export function trackPreviewBrowse(orderId: string, style: string) {
+  capture("preview_browse", { order_id: orderId, style });
+}
+
 export function trackCheckoutClick(plan: string) {
   capture("checkout_click", { plan });
 }
