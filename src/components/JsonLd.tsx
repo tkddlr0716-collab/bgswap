@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://bgswap.io";
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://bgswap.io";
 
 const faqData = [
   { q: "How does it work?", a: "Upload a product photo. Our AI removes the background in seconds and places your product on 15 professional backgrounds — solids, gradients, and textures." },
@@ -83,5 +83,46 @@ export function LandingJsonLd() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
       />
     </>
+  );
+}
+
+export function BlogPostJsonLd({
+  title,
+  description,
+  date,
+  slug,
+  image,
+}: {
+  title: string;
+  description: string;
+  date: string;
+  slug: string;
+  image?: string;
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description,
+    datePublished: date,
+    url: `${BASE_URL}/blog/${slug}`,
+    image: image || `${BASE_URL}/og-image.png`,
+    author: {
+      "@type": "Organization",
+      name: "BgSwap",
+      url: BASE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "BgSwap",
+      url: BASE_URL,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
   );
 }

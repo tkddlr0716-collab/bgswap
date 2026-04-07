@@ -1,4 +1,7 @@
-export const metadata = { title: "Privacy Policy - BgSwap" };
+export const metadata = {
+  title: "Privacy Policy - BgSwap",
+  description: "How BgSwap handles your data. Photos auto-deleted after 7 days. No tracking beyond basic analytics.",
+};
 
 export default function PrivacyPage() {
   return (

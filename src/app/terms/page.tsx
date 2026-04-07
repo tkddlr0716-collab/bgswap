@@ -1,4 +1,7 @@
-export const metadata = { title: "Terms of Service - BgSwap" };
+export const metadata = {
+  title: "Terms of Service - BgSwap",
+  description: "Terms of service for BgSwap, the AI product photo background removal tool for e-commerce sellers.",
+};
 
 export default function TermsPage() {
   return (

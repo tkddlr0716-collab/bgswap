@@ -84,6 +84,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trust Signals */}
+      <section className="bg-gray-50 px-4 py-6 border-y border-gray-100">
+        <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-8 text-center text-sm text-gray-500">
+          <div className="flex items-center gap-2">
+            <span className="text-green-600 font-bold text-base">&#10003;</span>
+            <span>Amazon white background compliant</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-green-600 font-bold text-base">&#10003;</span>
+            <span>7-day money-back guarantee</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-green-600 font-bold text-base">&#10003;</span>
+            <span>Photos auto-deleted after 7 days</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-green-600 font-bold text-base">&#10003;</span>
+            <span>No subscription, ever</span>
+          </div>
+        </div>
+      </section>
+
       {/* Portfolio Filmstrip — Before/After showcase */}
       <PortfolioStrip />
 
@@ -123,7 +145,7 @@ export default function Home() {
       </section>
 
       {/* How It Works — 3 Steps */}
-      <section className="bg-gray-50 px-4 py-16">
+      <section id="how-it-works" className="bg-gray-50 px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">3 Steps. Under 1 Minute.</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
@@ -207,7 +229,7 @@ export default function Home() {
       </section>
 
       {/* Pricing */}
-      <section className="px-4 py-16">
+      <section id="pricing" className="px-4 py-16">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-3">Simple, One-Time Pricing</h2>
           <p className="text-center text-gray-500 mb-10">No subscription. No hidden fees. Pay once.</p>

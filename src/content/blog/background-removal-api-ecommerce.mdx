@@ -1,0 +1,170 @@
+export const meta = {
+  title: "Background Removal API for E-commerce: Shopify, WooCommerce & Custom Stores",
+  description: "Compare background removal APIs for e-commerce automation. Pricing, integration, and how to automate product photo processing at scale.",
+  date: "2026-04-07",
+};
+
+If you're processing more than a few hundred product photos per month, you need automation. Manual uploads don't scale. A background removal API does.
+
+This guide covers what's available, what it costs, and how to choose the right approach for your store.
+
+---
+
+## Why Use a Background Removal API?
+
+Manual workflow:
+1. Download product photo
+2. Upload to a background removal tool
+3. Wait for processing
+4. Download result
+5. Upload to your store
+6. Repeat 500 times
+
+API workflow:
+1. Your system sends the image to the API
+2. API returns the processed image
+3. Your system uploads it to the store
+4. Fully automated
+
+For stores with 100+ new products per week, the manual approach costs hours of labor. An API costs cents per image.
+
+---
+
+## API Options Compared
+
+### remove.bg API
+
+**Pricing:** $0.40/image (pay-as-you-go), down to $0.14/image at volume (10,000+/month)
+
+**What it does:**
+- Background removal only — returns transparent PNG
+- You need to add your own background afterward
+- Good edge detection, well-established
+
+**Best for:** Developers who want transparent PNGs and will composite backgrounds themselves.
+
+**Limitation:** No background replacement. You get a cutout, not a finished product photo.
+
+### PhotoRoom API
+
+**Pricing:** Custom pricing (contact sales), generally $0.05-0.15/image at volume
+
+**What it does:**
+- Background removal + AI-generated backgrounds
+- Templates and batch processing
+- Full editing suite API
+
+**Best for:** Large enterprises needing custom workflows and white-glove support.
+
+**Limitation:** Complex pricing, requires sales call, overkill for simple background replacement.
+
+### Clipdrop API (by Stability AI)
+
+**Pricing:** Free tier available, paid plans from $9/month (100 images)
+
+**What it does:**
+- Background removal
+- Image upscaling
+- Object removal
+
+**Best for:** Multi-purpose image editing beyond just backgrounds.
+
+**Limitation:** Focused on general image editing, not e-commerce specifically.
+
+---
+
+## Cost Comparison: 1,000 Products/Month
+
+| Service | Cost per image | Monthly cost (1,000) | Backgrounds included |
+|---------|---------------|---------------------|---------------------|
+| remove.bg API | $0.14-0.40 | $140-400 | 0 (transparent only) |
+| PhotoRoom API | ~$0.10 | ~$100 | AI-generated |
+| Clipdrop API | $0.09 | $90 | 0 (transparent only) |
+| BgSwap (manual batch) | $0.029 | $29 (per 100 batch) | 15 per product |
+| Fiverr editors | $3-5 | $3,000-5,000 | 1 per product |
+
+**Key insight:** API pricing adds up fast at scale. At 1,000 images/month, remove.bg costs $140-400 just for background removal — without any background replacement.
+
+---
+
+## Shopify Integration Options
+
+### Option 1: Shopify Apps
+Several Shopify apps offer built-in background removal:
+- **Pixelcut** — Background removal + editing in Shopify admin
+- **Photoroom** — AI backgrounds directly in product editor
+- **remove.bg Shopify app** — One-click removal in product page
+
+**Pros:** No coding required, works in Shopify admin
+**Cons:** Per-image pricing, limited customization, ongoing subscription
+
+### Option 2: Custom API Integration
+Build a workflow that:
+1. Watches for new product uploads
+2. Sends images to a background removal API
+3. Receives processed images
+4. Updates the product listing automatically
+
+**Pros:** Fully automated, customizable
+**Cons:** Requires development time
+
+### Option 3: Batch Processing (No API Needed)
+For most sellers, you don't need an API. You need batch processing:
+1. Export product images from Shopify
+2. Upload batch to BgSwap (up to 100 at once)
+3. Download processed images
+4. Re-import to Shopify
+
+This works for stores adding 10-200 new products per month. No coding, no API keys, no monthly subscription.
+
+---
+
+## WooCommerce Integration
+
+WooCommerce's open-source nature gives you more flexibility:
+
+### Plugin Options
+- **remove.bg for WordPress** — Background removal in media library
+- **Flavor** — AI product photos with custom backgrounds
+
+### Custom Integration
+WooCommerce + WordPress makes it straightforward to build custom integrations using any background removal API. Use the `woocommerce_product_save` hook to automatically process uploaded images.
+
+---
+
+## When You Don't Need an API
+
+Be honest about your volume:
+
+- **Under 100 products/month:** Batch upload to BgSwap. $29 per batch, done in 15 minutes. No API needed.
+- **100-500 products/month:** Batch processing still works. Multiple batches per month.
+- **500+ products/month:** Consider an API for full automation.
+
+Most independent sellers and small stores fall in the first two categories. An API is engineering overhead you probably don't need yet.
+
+---
+
+## The BgSwap Approach
+
+BgSwap isn't an API (yet). It's a batch processing tool designed for the 90% of sellers who don't need real-time automation:
+
+- Upload up to 100 products at once
+- Each gets 15 marketplace-ready backgrounds
+- Download everything as a ZIP
+- $29 per batch — no subscription, no per-image fees
+
+For most e-commerce sellers, this is the sweet spot: fast enough, cheap enough, no engineering required.
+
+[Try it free](https://bgswap.io) — one photo, see the quality for yourself.
+
+---
+
+## Summary
+
+| Your situation | Best approach |
+|---------------|--------------|
+| Under 100 products/month | BgSwap batch processing |
+| 100-500 products/month | BgSwap batch processing (multiple batches) |
+| 500+ products/month, technical team | Background removal API |
+| Enterprise, custom workflows | PhotoRoom or custom solution |
+| Just need transparent PNGs | remove.bg API |

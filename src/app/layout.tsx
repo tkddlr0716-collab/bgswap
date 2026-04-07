@@ -44,6 +44,11 @@ export default function RootLayout({
             <Link href="/" className="text-lg font-bold text-gray-900">
               BgSwap
             </Link>
+            <nav className="hidden sm:flex items-center gap-6 text-sm text-gray-600">
+              <a href="#how-it-works" className="hover:text-gray-900 transition">How it works</a>
+              <a href="#pricing" className="hover:text-gray-900 transition">Pricing</a>
+              <Link href="/blog" className="hover:text-gray-900 transition">Blog</Link>
+            </nav>
             <Link
               href="/upload"
               className="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition"
@@ -69,6 +74,7 @@ export default function RootLayout({
                 <a href="/privacy" className="hover:text-gray-700 transition">Privacy</a>
                 <a href="/terms" className="hover:text-gray-700 transition">Terms</a>
                 <a href="/refund" className="hover:text-gray-700 transition">Refunds</a>
+                <a href="mailto:support@bgswap.io" className="hover:text-gray-700 transition">Contact</a>
               </div>
               <div className="text-xs text-gray-600">
                 &copy; {new Date().getFullYear()} BgSwap

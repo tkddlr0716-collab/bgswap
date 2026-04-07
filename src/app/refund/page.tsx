@@ -1,4 +1,7 @@
-export const metadata = { title: "Refund Policy - BgSwap" };
+export const metadata = {
+  title: "Refund Policy - BgSwap",
+  description: "BgSwap offers a 7-day money-back guarantee. Try free before you buy, no credit card required.",
+};
 
 export default function RefundPage() {
   return (

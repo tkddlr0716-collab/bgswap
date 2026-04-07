@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { BlogPostJsonLd } from "@/components/JsonLd";
 
 interface BlogMeta {
   title: string;
@@ -22,6 +23,31 @@ const POSTS: Record<string, () => Promise<any>> = {
   "product-photo-background-colors": () => import("@/content/blog/product-photo-background-colors.mdx"),
   "shopify-product-image-size": () => import("@/content/blog/shopify-product-image-size.mdx"),
   "diy-product-photography-at-home": () => import("@/content/blog/diy-product-photography-at-home.mdx"),
+  "background-removal-looks-fake-fix": () => import("@/content/blog/background-removal-looks-fake-fix.mdx"),
+  "amazon-product-photo-rejected-fix": () => import("@/content/blog/amazon-product-photo-rejected-fix.mdx"),
+  "ebay-product-photo-requirements": () => import("@/content/blog/ebay-product-photo-requirements.mdx"),
+  "dropshipping-product-photos": () => import("@/content/blog/dropshipping-product-photos.mdx"),
+  "background-removal-api-ecommerce": () => import("@/content/blog/background-removal-api-ecommerce.mdx"),
+  "edit-100-product-photos-fast": () => import("@/content/blog/edit-100-product-photos-fast.mdx"),
+  "product-photo-editing-cost-comparison": () => import("@/content/blog/product-photo-editing-cost-comparison.mdx"),
+  "amazon-image-slots-strategy": () => import("@/content/blog/amazon-image-slots-strategy.mdx"),
+  "aliexpress-supplier-photos-fix": () => import("@/content/blog/aliexpress-supplier-photos-fix.mdx"),
+  "dropshipping-store-looks-fake": () => import("@/content/blog/dropshipping-store-looks-fake.mdx"),
+  "freelance-product-photo-editor-workflow": () => import("@/content/blog/freelance-product-photo-editor-workflow.mdx"),
+  "product-photos-that-increase-sales": () => import("@/content/blog/product-photos-that-increase-sales.mdx"),
+  "product-photo-lighting-setup-free": () => import("@/content/blog/product-photo-lighting-setup-free.mdx"),
+  "amazon-listing-optimization-images-checklist": () => import("@/content/blog/amazon-listing-optimization-images-checklist.mdx"),
+  "product-photo-mistakes-that-kill-sales": () => import("@/content/blog/product-photo-mistakes-that-kill-sales.mdx"),
+  "sell-more-on-etsy-with-better-photos": () => import("@/content/blog/sell-more-on-etsy-with-better-photos.mdx"),
+  "product-photography-for-beginners-complete-guide": () => import("@/content/blog/product-photography-for-beginners-complete-guide.mdx"),
+  "how-to-photograph-small-products-jewelry-accessories": () => import("@/content/blog/how-to-photograph-small-products-jewelry-accessories.mdx"),
+  "ai-tools-ecommerce-sellers-2026": () => import("@/content/blog/ai-tools-ecommerce-sellers-2026.mdx"),
+  "amazon-fba-fees-save-margin-2026": () => import("@/content/blog/amazon-fba-fees-save-margin-2026.mdx"),
+  "multichannel-selling-image-guide": () => import("@/content/blog/multichannel-selling-image-guide.mdx"),
+  "new-seller-first-100-sales-checklist": () => import("@/content/blog/new-seller-first-100-sales-checklist.mdx"),
+  "product-listing-anatomy-8-elements": () => import("@/content/blog/product-listing-anatomy-8-elements.mdx"),
+  "reduce-product-returns-with-better-images": () => import("@/content/blog/reduce-product-returns-with-better-images.mdx"),
+  "shopify-traffic-no-sales-fix": () => import("@/content/blog/shopify-traffic-no-sales-fix.mdx"),
 };
 
 export function generateStaticParams() {
@@ -69,6 +95,13 @@ export default async function BlogPost({
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-12">
+      <BlogPostJsonLd
+        title={meta.title}
+        description={meta.description}
+        date={meta.date}
+        slug={slug}
+        image={meta.image}
+      />
       <Link href="/blog" className="text-blue-600 text-sm hover:underline mb-6 inline-block">
         &larr; Back to blog
       </Link>
